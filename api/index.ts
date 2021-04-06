@@ -1,11 +1,15 @@
 import { VercelRequest, VercelResponse } from '@vercel/node';
 
 export default (request: VercelRequest, response: VercelResponse) => {
-    console.log(request.body);
+    let chunks: Uint8Array[] = [];
+    
+    request.on('data', (chunk) => {
+        chunks.push(chunk);
+    }).on('end', () => {
+        const body = Buffer.concat(chunks).toString();
 
-    try {
-        response.send(request.body);
-    } catch (e) {
-        response.status(400).send("Cannot parse the request body!");
-    }
+        console.log(body);
+
+        response.send(body);
+    });
 }
