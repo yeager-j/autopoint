@@ -13,9 +13,11 @@
     "cheerio": "^1.0.0-rc.5",
     "openapi-request-validator": "^7.4.0",
     "typescript": "^4.2.3",
+    "valid-url": "^1.0.9",
     "xml-js": "^1.6.11"
   },
   "devDependencies": {
+    "@types/valid-url": "^1.0.3",
     "vercel": "^21.3.3"
   }
 }
