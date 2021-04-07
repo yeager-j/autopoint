@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<StoreOrder StoreID="254" PartnerID="34" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <Order StoreShippingMethodID="Mail_Third" StoreOrderID="14766302" TestMode="255" StoreOrderDate="2021-02-27T00:10:14.4Z">
+        <Customer>
+            <BillToAddress>
+                <FirstName></FirstName>
+                <LastName></LastName>
+                <Address1></Address1>
+                <City></City>
+                <State></State>
+                <Zip>3</Zip>
+                <Country>US</Country>
+                <CompanyName>Autopoint</CompanyName>
+            </BillToAddress>
+        </Customer>
+        <OrderDetails>
+            <OrderDetail StoreShippingMethodID="Mail_Third" StoreProductID="SM_8.5x4.875_80GT_WB" StoreOrderDetailID="14766302_1">
+                <Quantity>4363</Quantity>
+                <DueDate>2021-03-02T00:00:00</DueDate>
+                <Files>
+                    <File RequiredFileID="0">
+                        <Path>\\rp1fs3.home.com\PSSPOOL\Jax\14766302\14766302_8.5x13.75 Self-Mailer Standard Class(647).pdf</Path>
+                        <PathType>File</PathType>
+                    </File>
+                </Files>
+            </OrderDetail>
+        </OrderDetails>
+        <CarrierAccount>647</CarrierAccount>
+        <MailSupport>
+            <SupportFile RequiredFileID="67">
+                <Path>\\rp1fs3.home.com\PSSPOOL\DMEaJax\14766302\14766302_CASS.pdf</Path>
+                <PathType>File</PathType>
+            </SupportFile>
+            <SupportFile RequiredFileID="72">
+                <Path>\\rp1fs3.home.com\PSSPOOL\DMEaJax\14766302\14766302_co_data.xls</Path>
+                <PathType>File</PathType>
+            </SupportFile>
+            <SupportFile RequiredFileID="72">
+                <Path>\\rp1fs3.home.com\PSSPOOL\DMEaJax\14766302\14766302_data.xls</Path>
+                <PathType>File</PathType>
+            </SupportFile>
+            <SupportFile RequiredFileID="67">
+                <Path>\\rp1fs3.home.com\PSSPOOL\DMEaJax\14766302\14766302_Presort.pdf</Path>
+                <PathType>File</PathType>
+            </SupportFile>
+            <SupportFile RequiredFileID="66">
+                <Path>\\rp1fs3.home.com\PSSPOOL\DMEaJax\14766302\14766302_Presort_CONTAINER_LABELS.pdf</Path>
+                <PathType>File</PathType>
+            </SupportFile>
+            <SupportFile RequiredFileID="67">
+                <Path>\\rp1fs3.home.com\PSSPOOL\DMEaJax\14766302\14766302_Presort_CONTAINER_LISTING.pdf</Path>
+                <PathType>File</PathType>
+            </SupportFile>
+            <SupportFile RequiredFileID="67">
+                <Path>\\rp1fs3.home.com\PSSPOOL\DMEaJax\14766302\14766302_Presort_MAIL_SORT_SUMMARY.pdf</Path>
+                <PathType>File</PathType>
+            </SupportFile>
+            <SupportFile RequiredFileID="67">
+                <Path>\\rp1fs3.home.com\PSSPOOL\DMEaJax\14766302\14766302_Presort_POSTAGE.pdf</Path>
+                <PathType>File</PathType>
+            </SupportFile>
+            <SupportFile RequiredFileID="67">
+                <Path>\\rp1fs3.home.com\PSSPOOL\DMEaJax\14766302\14766302_Presort_ZIP_LISTING.pdf</Path>
+                <PathType>File</PathType>
+            </SupportFile>
+            <SupportFile RequiredFileID="68">
+                <Path>\\rp1fs3.home.com\PSSPOOL\DMEaJax\14766302\14766302_ziponly.csv</Path>
+                <PathType>File</PathType>
+            </SupportFile>
+            <SupportFile RequiredFileID="65">
+                <Path>\\rp1fs3.home.com\PSSPOOL\DMEaJax\14766302\mail.dat.zip</Path>
+                <PathType>File</PathType>
+            </SupportFile>
+        </MailSupport>
+    </Order>
+</StoreOrder>

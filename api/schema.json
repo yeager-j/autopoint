@@ -1,0 +1,296 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Autopoint order submission API",
+    "version": "1.0-oas3"
+  },
+  "servers": [
+    {
+      "url": "https://virtserver.swaggerhub.com/dwightkelly/autopoint-orders/1.0"
+    }
+  ],
+  "security": [
+    {
+      "ApiKeyAuth": []
+    }
+  ],
+  "paths": {
+    "/orders": {
+      "post": {
+        "summary": "Send new order",
+        "requestBody": {
+          "content": {
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/StoreOrder"
+              },
+              "examples": {
+                "xml": {
+                  "summary": "sample order XML",
+                  "value": "<?xml version=\"1.0\" encoding=\"utf-8\"?><StoreOrder StoreID=\"254\" PartnerID=\"34\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"><Order StoreShippingMethodID=\"Mail_Third\" StoreOrderID=\"14766302\" TestMode=\"255\" StoreOrderDate=\"2021-02-27T00:10:14.4Z\"><Customer><BillToAddress><FirstName></FirstName><LastName></LastName><Address1></Address1><City></City><State></State><Zip>3</Zip><Country>US</Country><CompanyName>Autopoint</CompanyName></BillToAddress></Customer><OrderDetails><OrderDetail StoreShippingMethodID=\"Mail_Third\" StoreProductID=\"SM_8.5x4.875_80GT_WB\" StoreOrderDetailID=\"14766302_1\"><Quantity>4363</Quantity><DueDate>2021-03-02T00:00:00</DueDate><Files><File RequiredFileID=\"0\"><Path>\\\\rp1fs3.home.com\\PSSPOOL\\Jax\\14766302\\14766302_8.5x13.75 Self-Mailer Standard Class(647).pdf</Path><PathType>File</PathType></File></Files></OrderDetail></OrderDetails><CarrierAccount>647</CarrierAccount><MailSupport><SupportFile RequiredFileID=\"67\"><Path>\\\\rp1fs3.home.com\\PSSPOOL\\DMEaJax\\14766302\\14766302_CASS.pdf</Path><PathType>File</PathType></SupportFile><SupportFile RequiredFileID=\"72\"><Path>\\\\rp1fs3.home.com\\PSSPOOL\\DMEaJax\\14766302\\14766302_co_data.xls</Path><PathType>File</PathType></SupportFile><SupportFile RequiredFileID=\"72\"><Path>\\\\rp1fs3.home.com\\PSSPOOL\\DMEaJax\\14766302\\14766302_data.xls</Path><PathType>File</PathType></SupportFile><SupportFile RequiredFileID=\"67\"><Path>\\\\rp1fs3.home.com\\PSSPOOL\\DMEaJax\\14766302\\14766302_Presort.pdf</Path><PathType>File</PathType></SupportFile><SupportFile RequiredFileID=\"66\"><Path>\\\\rp1fs3.home.com\\PSSPOOL\\DMEaJax\\14766302\\14766302_Presort_CONTAINER_LABELS.pdf</Path><PathType>File</PathType></SupportFile><SupportFile RequiredFileID=\"67\"><Path>\\\\rp1fs3.home.com\\PSSPOOL\\DMEaJax\\14766302\\14766302_Presort_CONTAINER_LISTING.pdf</Path><PathType>File</PathType></SupportFile><SupportFile RequiredFileID=\"67\"><Path>\\\\rp1fs3.home.com\\PSSPOOL\\DMEaJax\\14766302\\14766302_Presort_MAIL_SORT_SUMMARY.pdf</Path><PathType>File</PathType></SupportFile><SupportFile RequiredFileID=\"67\"><Path>\\\\rp1fs3.home.com\\PSSPOOL\\DMEaJax\\14766302\\14766302_Presort_POSTAGE.pdf</Path><PathType>File</PathType></SupportFile><SupportFile RequiredFileID=\"67\"><Path>\\\\rp1fs3.home.com\\PSSPOOL\\DMEaJax\\14766302\\14766302_Presort_ZIP_LISTING.pdf</Path><PathType>File</PathType></SupportFile><SupportFile RequiredFileID=\"68\"><Path>\\\\rp1fs3.home.com\\PSSPOOL\\DMEaJax\\14766302\\14766302_ziponly.csv</Path><PathType>File</PathType></SupportFile><SupportFile RequiredFileID=\"65\"><Path>\\\\rp1fs3.home.com\\PSSPOOL\\DMEaJax\\14766302\\mail.dat.zip</Path><PathType>File</PathType></SupportFile></MailSupport></Order></StoreOrder>"
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Received order"
+          },
+          "400": {
+            "description": "Error detected in order"
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "StoreOrder": {
+        "required": [
+          "Order",
+          "PartnerID",
+          "StoreID"
+        ],
+        "type": "object",
+        "properties": {
+          "StoreID": {
+            "type": "integer",
+            "xml": {
+              "attribute": true
+            }
+          },
+          "PartnerID": {
+            "type": "integer",
+            "xml": {
+              "attribute": true
+            }
+          },
+          "Order": {
+            "$ref": "#/components/schemas/StoreOrder_Order"
+          }
+        }
+      },
+      "StoreOrder_Order_Customer_BillToAddress": {
+        "type": "object",
+        "properties": {
+          "FirstName": {
+            "type": "string"
+          },
+          "LastName": {
+            "type": "string"
+          },
+          "Address1": {
+            "type": "string"
+          },
+          "City": {
+            "type": "string"
+          },
+          "State": {
+            "type": "string"
+          },
+          "Zip": {
+            "type": "string"
+          },
+          "Country": {
+            "type": "string"
+          },
+          "CompanyName": {
+            "type": "string"
+          }
+        }
+      },
+      "StoreOrder_Order_Customer": {
+        "required": [
+          "Address1",
+          "City",
+          "CompanyName",
+          "Country",
+          "FirstName",
+          "LastName",
+          "State",
+          "Zip"
+        ],
+        "type": "object",
+        "properties": {
+          "BillToAddress": {
+            "$ref": "#/components/schemas/StoreOrder_Order_Customer_BillToAddress"
+          }
+        }
+      },
+      "StoreOrder_Order_Files": {
+        "required": [
+          "Path",
+          "PathType",
+          "RequiredFileID"
+        ],
+        "type": "object",
+        "properties": {
+          "RequiredFileID": {
+            "type": "integer",
+            "xml": {
+              "attribute": true
+            }
+          },
+          "Path": {
+            "type": "string"
+          },
+          "PathType": {
+            "type": "string",
+            "enum": [
+              "File",
+              "URN"
+            ]
+          }
+        },
+        "xml": {
+          "name": "File",
+          "wrapped": true
+        }
+      },
+      "StoreOrder_Order_OrderDetails": {
+        "required": [
+          "DueDate",
+          "Files",
+          "Quantity",
+          "StoreOrderDetailID",
+          "StoreProductID",
+          "StoreShippingMethodID"
+        ],
+        "type": "object",
+        "properties": {
+          "StoreShippingMethodID": {
+            "type": "string",
+            "xml": {
+              "attribute": true
+            }
+          },
+          "StoreProductID": {
+            "type": "string",
+            "xml": {
+              "attribute": true
+            }
+          },
+          "StoreOrderDetailID": {
+            "type": "string",
+            "xml": {
+              "attribute": true
+            }
+          },
+          "Quantity": {
+            "type": "integer"
+          },
+          "DueDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "Files": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/StoreOrder_Order_Files"
+            }
+          }
+        }
+      },
+      "StoreOrder_Order_MailSupport": {
+        "type": "object",
+        "properties": {
+          "RequiredFileID": {
+            "type": "integer",
+            "xml": {
+              "attribute": true
+            }
+          },
+          "Path": {
+            "type": "string"
+          },
+          "PathType": {
+            "type": "string",
+            "enum": [
+              "File",
+              "URN"
+            ]
+          }
+        }
+      },
+      "StoreOrder_Order": {
+        "required": [
+          "Customer",
+          "OrderDetails",
+          "StoreOrderDate",
+          "StoreOrderID",
+          "StoreShippingMethodID"
+        ],
+        "type": "object",
+        "properties": {
+          "StoreShippingMethodID": {
+            "type": "string",
+            "xml": {
+              "attribute": true
+            }
+          },
+          "StoreOrderID": {
+            "type": "integer",
+            "xml": {
+              "attribute": true
+            }
+          },
+          "StoreOrderDate": {
+            "type": "string",
+            "format": "date-time",
+            "xml": {
+              "attribute": true
+            }
+          },
+          "TestMode": {
+            "type": "integer"
+          },
+          "Customer": {
+            "$ref": "#/components/schemas/StoreOrder_Order_Customer"
+          },
+          "OrderDetails": {
+            "type": "array",
+            "xml": {
+              "name": "OrderDetail",
+              "wrapped": true
+            },
+            "items": {
+              "$ref": "#/components/schemas/StoreOrder_Order_OrderDetails"
+            }
+          },
+          "CarrierAccount": {
+            "type": "integer"
+          },
+          "MailSupport": {
+            "required": [
+              "Path",
+              "PathType",
+              "RequiredFileID"
+            ],
+            "type": "array",
+            "xml": {
+              "name": "SupportFile",
+              "wrapped": true
+            },
+            "items": {
+              "$ref": "#/components/schemas/StoreOrder_Order_MailSupport"
+            }
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "ApiKeyAuth": {
+        "type": "apiKey",
+        "name": "X-API-KEY",
+        "in": "header"
+      }
+    }
+  }
+}
