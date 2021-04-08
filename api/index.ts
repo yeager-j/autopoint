@@ -2,6 +2,8 @@ import { VercelRequest, VercelResponse } from '@vercel/node';
 import cheerio from 'cheerio';
 import validUrl from 'valid-url';
 import { unimplemented } from './util';
+import { S3Client } from '@aws-sdk/client-s3';
+import { Upload } from '@aws-sdk/lib-storage';
 
 const parseXml = (request: VercelRequest): Promise<string> => {
     return new Promise((resolve, reject) => {
@@ -38,7 +40,7 @@ document root is <StoreOrder>
  */
 
 const validateXml = (body: string): boolean => {
-    const $ = cheerio.load(body, { xmlMode: true });
+    const $ = cheerio.load(body, {xmlMode: true});
 
     const storeOrder = $('StoreOrder');
 
@@ -131,7 +133,27 @@ export default async (request: VercelRequest, response: VercelResponse) => {
     const isValid = validateXml(body);
 
     if (isValid) {
-        response.status(201).send('OK');
+        const client = new S3Client({
+            region: process.env.TARGET_REGION
+        });
+
+        const upload = new Upload({
+            client,
+            params: {
+                Bucket: process.env.TARGET_BUCKET,
+                Body: body,
+                Key: `Orders/${Date.now()}.xml`,
+                ContentType: 'application/xml'
+            }
+        });
+
+        upload.done()
+            .then(() => {
+                response.status(201).send('OK');
+            })
+            .catch(() => {
+                response.status(500).send('Unable to upload Order XML to S3 bucket!');
+            });
     } else {
         response.status(400).send('Invalid XML!');
     }
